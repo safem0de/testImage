@@ -17,13 +17,17 @@ const Index = () => {
         const video = document.getElementById('video')
         function startVideo() {
             navigator.getUserMedia(
-                { video: {} },
+                { video: {
+                    width : 500,
+                    height : 500
+                } },
                 stream => video.srcObject = stream,
                 err => console.error(err)
             )
         }
         video.addEventListener('play', () => {
             const canvas = faceapi.createCanvasFromMedia(video)
+            canvas.id = 'test'
             document.body.append(canvas)
             const displaySize = { width: video.width, height: video.height }
             faceapi.matchDimensions(canvas, displaySize)
@@ -39,10 +43,19 @@ const Index = () => {
         })
     }
 
+    const takePhoto = () => {
+        var canvas = document.getElementById("test");
+        var img = canvas.toDataURL("image/png");
+
+        document.write('<img src="'+img+'"/>');
+    };
+
     return (
         <div>
             <body>
                 <video id="video" height="500px" width="500px" autoPlay muted />
+                <br/>
+                <button onClick={() => takePhoto()}>Take a photo</button>
             </body>
         </div>
     )
