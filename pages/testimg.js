@@ -60,13 +60,6 @@ const Index = () => {
         })
     }
 
-    const takePhoto = () => {
-        var canvas = document.getElementById("test");
-        var img = canvas.toDataURL("image/png");
-
-        document.write('<img src="'+img+'"/>');
-    };
-
     return (
         <div>
 
