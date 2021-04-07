@@ -33,10 +33,12 @@ const Index = () => {
         video.addEventListener('play', (e) => {
             e.preventDefault();
             var selection = document.querySelector('canvas') === null;
+            var sel_z = selection.id === 'test';
+            console.log(sel_z)
             if (selection) {
                 const canvas = faceapi.createCanvasFromMedia(video)
                 canvas.id = 'test'
-                document.body.append(canvas)
+                document.getElementById('main').appendChild(canvas)
                 const displaySize = { width: video.width, height: video.height }
                 faceapi.matchDimensions(canvas, displaySize)
                 setInterval(async () => {
@@ -61,27 +63,24 @@ const Index = () => {
     }
 
     return (
-        <div>
-
-            <body id="body">
+        <div id='main'>
                 <video id="video" height="500" width="500" autoPlay muted />
                 <br/>
                 <button onClick={()=> takePhoto('test',x,y,w,h)}>take Photo</button>
-
-            </body>
+                <br/>
         </div>
     )
 }
 
 
 function takePhoto(x_val,c_x,c_y,c_w,c_h){
-    var canvas = document.getElementById(x_val)
-    var data = canvas.toDataURL('image/png');
+    // var canvas = document.getElementById(x_val)
+    // var data = canvas.toDataURL('image/png');
 
-    var img = document.createElement("img");
-    img.src = data;
-    var src = document.querySelector('body')
-    src.appendChild(img);
+    // var img = document.createElement("img");
+    // img.src = data;
+    // var src = document.querySelector('body')
+    // src.appendChild(img);
 }
 
 export default Index;
